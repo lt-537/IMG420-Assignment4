@@ -1,0 +1,95 @@
+[gd_scene load_steps=13 format=3 uid="uid://bls7q8a84tv2w"]
+
+[ext_resource type="Script" uid="uid://chqutchjmp7pr" path="res://Scenes/Enemy.cs" id="1_7k104"]
+[ext_resource type="Texture2D" uid="uid://1m82svjkim8k" path="res://Assets/images/enemies/Idle.png" id="2_qi2p4"]
+[ext_resource type="Texture2D" uid="uid://bb8edxc0dd5bq" path="res://Assets/images/enemies/Walk.png" id="3_iifgy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epg4t"]
+atlas = ExtResource("2_qi2p4")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yqyl"]
+atlas = ExtResource("2_qi2p4")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wujgv"]
+atlas = ExtResource("2_qi2p4")
+region = Rect2(300, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hb8ge"]
+atlas = ExtResource("2_qi2p4")
+region = Rect2(450, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi2p4"]
+atlas = ExtResource("3_iifgy")
+region = Rect2(32, 37, 135, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iifgy"]
+atlas = ExtResource("3_iifgy")
+region = Rect2(167, 37, 135, 68)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ar8e5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epg4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yqyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wujgv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hb8ge")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qi2p4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iifgy")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qi2p4"]
+size = Vector2(48, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iifgy"]
+size = Vector2(76, 52.25)
+
+[node name="enemy" type="CharacterBody2D"]
+collision_layer = 4
+wall_min_slide_angle = 0.0
+floor_snap_length = 8.0
+script = ExtResource("1_7k104")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 10.0
+target_desired_distance = 4.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-3, 0)
+sprite_frames = SubResource("SpriteFrames_ar8e5")
+animation = &"walk"
+
+[node name="HurtArea" type="Area2D" parent="."]
+position = Vector2(-23, 5)
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
+position = Vector2(3, -1)
+shape = SubResource("RectangleShape2D_qi2p4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7, 3.875)
+shape = SubResource("RectangleShape2D_iifgy")
