@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1fv7t12yv3ra"]
-
-[ext_resource type="Script" uid="uid://ktv0cks1307k" path="res://LandingDust.cs" id="1_4ontp"]
-[ext_resource type="Texture2D" uid="uid://dc301nc2djo5q" path="res://Assets/images/particles/smoke_03.png" id="1_yp7vh"]
-
-[node name="LandingDust" type="GPUParticles2D"]
-texture = ExtResource("1_yp7vh")
-script = ExtResource("1_4ontp")
